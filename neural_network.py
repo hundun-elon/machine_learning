@@ -39,17 +39,20 @@ class Neural_Network():
 
             z1 = self.weight1@x + self.biases1
 
-            a1 = np.ones(len(self.biases1))
+            # a1 = np.ones(len(self.biases1))
 
-            for i in range(len(a1)):
-                  a1[i] = self.sigmoid(z1[i])
+            # for i in range(len(a1)):
+            #       a1[i] = self.sigmoid(z1[i])
+
+            a1 = self.sigmoid(z1)
 
 
             z2 = self.weight2@a1 + self.biases2 
-            y = np.ones(len(self.biases2))
+            # y = np.ones(len(self.biases2))
 
-            for i in range(len(y)):
-                  y[i] = self.sigmoid(z2[i])
+            # for i in range(len(y)):
+            #       y[i] = self.sigmoid(z2[i])
+            y = self.sigmoid(z2)
             
             return y 
 
@@ -59,20 +62,27 @@ class Neural_Network():
 def main():
       # actually instantiate a neural network.
       # pass 
-      inputs = []
-      targets =[]
+      inputs = np.zeros(5)
+      targets =np.zeros(3)
 
       for i in range(5):
-            inputs.append(int(input()))
+            inputs[i] = float(input())
       
       for i in range(3):
-            targets.append(int(input()))
+            targets[i] = (float(input()))
 
-      # n =Neural_Network()
+      n =Neural_Network()
       # n.print_attr()
+      # perform forward pass throgh the neural network.
 
-      print('inputs: ', inputs)
-      print('targets', targets)
+      y = n.forward_propagation(inputs)
+      answer1 = n.least_squares(y,targets)
+      print(answer1)
+
+
+
+      # print('inputs: ', inputs)
+      # print('targets', targets)
 
 if __name__ =="__main__":
       main()
