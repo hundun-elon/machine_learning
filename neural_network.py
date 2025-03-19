@@ -9,7 +9,7 @@ class Neural_Network():
 
             # the weights.
             self.weight1 = np.ones((10,5))
-            self.weight2 = np.ones((10,3))
+            self.weight2 = np.ones((3,10))
 
             # the biases.
             self.biases1 = np.ones((10,1))
@@ -35,8 +35,23 @@ class Neural_Network():
       
 
 
-      def forward_propagation(self):
-            pass
+      def forward_propagation(self, x):
+
+            z1 = self.weight1@x + self.biases1
+
+            a1 = np.ones(len(self.biases1))
+
+            for i in range(len(a1)):
+                  a1[i] = self.sigmoid(z1[i])
+
+
+            z2 = self.weight2@a1 + self.biases2 
+            y = np.ones(len(self.biases2))
+
+            for i in range(len(y)):
+                  y[i] = self.sigmoid(z2[i])
+            
+            return y 
 
       def back_propagation(self):
             pass 
@@ -44,9 +59,20 @@ class Neural_Network():
 def main():
       # actually instantiate a neural network.
       # pass 
+      inputs = []
+      targets =[]
 
-      n =Neural_Network()
-      n.print_attr()
+      for i in range(5):
+            inputs.append(int(input()))
+      
+      for i in range(3):
+            targets.append(int(input()))
+
+      # n =Neural_Network()
+      # n.print_attr()
+
+      print('inputs: ', inputs)
+      print('targets', targets)
 
 if __name__ =="__main__":
       main()
