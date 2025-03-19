@@ -55,9 +55,29 @@ class Neural_Network():
             y = self.sigmoid(z2)
             
             return y 
+#       def _backward_propagation(self, X, y):
+#         predict = self._forward_propagation(X)
+#         m = X.shape[0]
+#         delta3 = predict - y
+#         dz3 = np.multiply(delta3, self._sigmoid_prime(self.z3))
+#         self.dw2 = (1/m)*np.sum(np.multiply(self.a2, dz3), axis=1).reshape(self.w2.shape)
+        
+#         delta2 = delta3*self.w2*self._sigmoid_prime(self.z2)
+#         self.dw1 = (1/m)*np.dot(X.T, delta2.T)
+        
+#     def _sigmoid_prime(self, z):
+#         return self._sigmoid(z)*(1-self._sigmoid(z))
+      def back_propagation(self, x , t):
 
-      def back_propagation(self):
-            pass 
+            predict = self.forward_propagation(x)
+
+            m = x.shape[0]
+            delta3 = predict - t 
+            dz3 = np.multiply(delta3, self.sigmoid(self.z2))
+            self.dw2 =(1/m)*np.sum(np.multiply(self.a2, dz3), axis=1).reshape(self.weight2.shape)
+            delta2 = delta3*self.weight2*self._sigmoid_prime(self.z1)
+            self.dw1 = (1/m)*np.dot(X.T, delta2.T)
+             
 
 def main():
       # actually instantiate a neural network.
@@ -78,7 +98,7 @@ def main():
       y = n.forward_propagation(inputs)
       answer1 = n.least_squares(y,targets)
       print(answer1)
-
+      # n.back_propagation()
 
 
       # print('inputs: ', inputs)
